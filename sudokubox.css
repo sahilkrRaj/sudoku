@@ -1,5 +1,5 @@
 
-:root{
+/* :root{
   --bg-color:#e8fccf;
   --border-color:#1b4332;
   --border-color-light:#b4ceb9;
@@ -10,7 +10,7 @@
 
 
 
-}
+} */
 *{
     /* -webkit-appearance: none; */
     box-sizing: border-box;         
@@ -145,7 +145,24 @@ input:focus{
     border: 2px solid var(--border-color);
     font-size: 1.4rem;
 }
+.button:hover{
+    transition: all 0.7s ease;
+    background-color:var(--border-color-light);
+}
  .fa-arrow-rotate-right{
     margin-right:6px;
     font-size: 20px;
+}
+select{
+    font-size:1.5rem;
+    padding: 8px 20px;
+    background-color:var(--bg-color);
+    border:3px solid var(--border-color);
+    border-radius:0;
+    appearance: none;
+
+}
+select:hover{
+    transition: all 0.7s ease;
+    background-color:var(--background-color);
 }
