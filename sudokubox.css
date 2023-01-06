@@ -19,6 +19,7 @@
     font-family: monospace;
 }
 nav{
+    color:var(--font-light);
     height: 10vh; 
     background-color: var(--border-color-light);
     display: flex;
@@ -27,6 +28,7 @@ nav{
     padding: 0 5vw;
 }
 nav h2{
+    color:var(--font-dark);
     display: flex;
     align-items: center;
     width:130px;
@@ -75,12 +77,13 @@ nav h2{
     justify-content: center;
     align-items: center;
     background-color: var(--bg-color);
-    height: 80vh;
+    height: 90vh;
     width: 100vw;
     
 }
 .grid-container{
     border:2px solid var(--border-color);
+    color: var(--font-dark);
 }
 
 
@@ -92,18 +95,19 @@ grid-template-columns: auto auto auto;
 
 .grid-container-box{
     border: 2px solid var(--border-color);
+   
     border-collapse: collapse;
 }
 
 
 .grid-item {
-
-text-align: center;
+    text-align: center;
 }
 
 input{
     outline: none;
     width: 45px;
+    color: var(--font-dark);
     height: 45px;
     text-align: center;
     font-size: 1.6rem;
@@ -115,6 +119,7 @@ input:focus{
 }
 
 .info-bar{
+    color: var(--font-light);
     background-color: var(--cell-colour);
     display: flex;
     justify-content:space-around;
@@ -138,9 +143,10 @@ input:focus{
     background-color: var(--cell-colour);
     display: flex;
     align-items: center;
+    color: var(--font-light);
     height: 55px;
     margin-right:10px; 
-    padding: 0 16px;
+    padding: 0 22px;
     font-weight: 600;
     border: 2px solid var(--border-color);
     font-size: 1.4rem;
@@ -154,6 +160,7 @@ input:focus{
     font-size: 20px;
 }
 select{
+    color:var(--font-light);
     font-size:1.5rem;
     padding: 8px 20px;
     background-color:var(--bg-color);
@@ -165,4 +172,17 @@ select{
 select:hover{
     transition: all 0.7s ease;
     background-color:var(--background-color);
+}
+.button-solve{
+    background-color: var(--cell-colour);
+    display: flex;
+    align-items: center;
+    color: var(--font-light); 
+    padding: 0 16px;
+    font-weight: 700;
+    border: 2px solid var(--border-color);
+    font-size: 1.4rem;
+    width:420px;
+    height: 60px;
+    margin-top: -15px;
 }

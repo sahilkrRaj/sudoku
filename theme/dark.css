@@ -1,13 +1,13 @@
 
 :root{
-    --bg-color:#203606;
-    --border-color:#71eeba;
-    --border-color-light:#5cc671;
+    --bg-color:#2c2c2c;
+    --border-color:#222222;
+    --border-color-light:#3f3e3e;
     --text-light:rgb(117, 113, 113);
-    --cell-colour:#5d9065;
+    --cell-colour:#5d5d5d;
     --right-color:lightblue;
     --wrong-color:tomato;
-  
-  
+    --font-dark:rgb(28, 28, 28);
+    --font-light:rgb(236, 235, 235);
   
   }

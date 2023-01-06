@@ -1,34 +1,135 @@
 // ********************************
-// value filling in cell box
 let box=[
-    [3, 0 ,6 ,5 ,0, 8, 4, 0, 0],
-    [5 ,2, 0, 0, 0, 0 ,0, 0, 0],
-    [0 ,8, 7, 0, 0, 0 ,0 ,3 ,1],
-    [0 ,0 ,3 ,0 ,1 ,0 ,0 ,8, 0],
-    [9 ,0 ,0, 8, 6, 3, 0, 0, 5],
-    [0 ,5, 0, 0, 9 ,0 ,6 ,0, 0],
-    [1 ,3, 0, 0, 0, 0, 2 ,5, 0],
-    [0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ,4],
-    [0 ,0, 5, 2, 0, 6, 3, 0, 0]
+  [3, 0 ,6 ,5 ,0, 8, 4, 0, 0],
+  [5 ,2, 0, 0, 0, 0 ,0, 0, 0],
+  [0 ,8, 7, 0, 0, 0 ,0 ,3 ,1],
+  [0 ,0 ,3 ,0 ,1 ,0 ,0 ,8, 0],
+  [9 ,0 ,0, 8, 6, 3, 0, 0, 5],
+  [0 ,5, 0, 0, 9 ,0 ,6 ,0, 0],
+  [1 ,3, 0, 0, 0, 0, 2 ,5, 0],
+  [0 ,0 ,0 ,0 ,0 ,0 ,0 ,7 ,4],
+  [0 ,0, 5, 2, 0, 6, 3, 0, 0]
 ];
 
 for(var i=0;i<9;i++){
-    for(var j=0;j<9;j++){
-        if(box[i][j]!=0){
-            document.getElementById(i+""+j).value=box[i][j];
-            document.getElementById(i+""+j).setAttribute('readonly', true);
-            
-        }
-        else{
-            document.getElementById(i+""+j).style.color="grey";
-        }
-        
-    }
+  for(var j=0;j<9;j++){
+      if(box[i][j]!=0){
+          document.getElementById(i+""+j).value=box[i][j];
+          document.getElementById(i+""+j).setAttribute('readonly', true);
+      }
+      else{
+          document.getElementById(i+""+j).style.color="grey";
+      }
+  }
 }
+
+// numbr input in box
+// ************************
+
+
+let rows = [0,0,0,0,0,0,0,0,0];
+let cols = [0,0,0,0,0,0,0,0,0];
+let grid = [[0,0,0],[0,0,0],[0,0,0]];
+
+for (var i = 0; i < 9; i++) {
+  for (var j = 0; j < 9; j++) {
+  rows[i] |= (1 << box[i][j]);
+  cols[j] |= (1 << box[i][j]);
+  grid[(i/3)>>0][(j/3)>>0] |= (1 << box[i][j]);
+  }
+}
+
+function updateRowsColsGridBox(num,i,j,val){
+  rows[i] ^= (1<<num);
+  cols[j] ^= (1<<num);
+  grid[(i/3)>>0][(j/3)>>0] ^= (1<<num);
+  box[i][j]=val;
+}
+
+const allButtons = document.querySelectorAll("input"); 
+allButtons.forEach((button)=>{
+  button.addEventListener("change", (e)=>{
+      var i=parseInt(e.composedPath()[0].id[0]);
+      var j=parseInt(e.composedPath()[0].id[1]);
+      
+      if(!e.target.readOnly && e.target.value!=""){
+          
+          updateRowsColsGridBox(box[i][j],i,j,0);
+         
+          var num=parseInt(e.target.value);
+
+          if((rows[i]&(1<<num))==0 && (cols[j]&(1<<num))==0 && (grid[(i/3)>>0][(j/3)>>0]&(1<<num))==0 )
+          {
+              document.getElementById(i+""+j).style.color="grey";
+              updateRowsColsGridBox(num,i,j,num);
+          }
+          else{
+              updateRowsColsGridBox(box[i][j],i,j,0);
+              document.getElementById(i+""+j).style.color="red";
+          }
+          
+      }else if(e.target.value==""){
+          updateRowsColsGridBox(box[i][j],i,j,0);
+      }
+
+  })
+})
+// ************************
+// ************************
+// AnimationEffect
+
+
+
+let currGridColoured=[];
+  let commonNumbersBox=[];
+  let rowConst=-1;
+  let colConst=-1;
+ 
+  allButtons.forEach((button)=>{
+      button.addEventListener("click", (e)=>{
+
+
+          if(rowConst!=-1)
+          for(var i=0;i<currGridColoured.length;i++){
+              currGridColoured[i].children[0].style.backgroundColor="#edfff0";
+              document.getElementById(rowConst+i).style.backgroundColor="#edfff0";
+              document.getElementById(i+colConst).style.backgroundColor="#edfff0";
+          }
+          for(var i=0;i<commonNumbersBox.length;i++){
+              commonNumbersBox[i].style.backgroundColor="#edfff0";
+          }
+          commonNumbersBox=[];
+          currGridColoured=e.composedPath()[2].children;
+          rowConst=e.composedPath()[0].id[0];
+          colConst=e.composedPath()[0].id[1];
+          for(var i=0;i<currGridColoured.length;i++){
+              currGridColoured[i].children[0].style.backgroundColor="lightblue";
+              document.getElementById(rowConst+i).style.backgroundColor="lightblue";
+              document.getElementById(i+colConst).style.backgroundColor="lightblue";
+          }
+          
+          document.getElementById(rowConst+colConst).style.backgroundColor="lightgrey";
+          
+          for(var a=0;a<9;a++){
+              for(var b=0;b<9;b++){
+                  if(parseInt(e.target.value)==box[a][b]){
+                      const bb=document.getElementById(a+""+b);
+                      bb.style.backgroundColor="lightgrey";
+                      commonNumbersBox.push(bb);
+                  }
+              }
+          }
+
+      })
+  })
+
+
+
+
 
 
   // ****************
- // theme selection code ENDS HERE!
+ // theme selection code STARTS HERE!
 
 function initThemeSelector() {
     const themeSelect = document.getElementById("themeSelect");
@@ -98,9 +199,12 @@ function timerCycle() {
         console.log("working");
         if(!stoptime){
             stoptime = true;
+            document.getElementById('pauseplay').className = "fa-solid fa-play";
         }else{
             stoptime = false;
+            document.getElementById('pauseplay').className = "fa-sharp fa-solid fa-pause";
             timerCycle();
         }
+
     }
 
