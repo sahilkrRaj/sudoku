@@ -1,0 +1,15 @@
+
+:root{
+    --bg-color:#e8fccf;
+    --border-color:#1b4332;
+    --border-color-light:#b4ceb9;
+    --text-light:rgb(188, 188, 188);
+    --cell-colour:#edfff0;
+    /* --cell-colour:red; */
+    --right-color:lightblue;
+    --wrong-color:tomato;
+    --font-dark:rgb(33, 33, 33);
+    --font-light:rgb(7, 6, 6);
+  
+  
+  }
