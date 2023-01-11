@@ -32,7 +32,7 @@ for(var i=0;i<9;i++){
     a+=2;
   }
 }
-console.log(box,ansbox);
+
 
 for(var i=0;i<9;i++){
   for(var j=0;j<9;j++){
@@ -70,6 +70,10 @@ function updateRowsColsGridBox(num,i,j,val){
 }
 
 const allButtons = document.querySelectorAll("input"); 
+function solverStartHandler() {       
+  solver = new Solver(allButtons,box,ansbox);
+  solver.speed = 250 - 100;
+}
 allButtons.forEach((button)=>{
   button.addEventListener("change", (e)=>{
       var i=parseInt(e.composedPath()[0].id[0]);
@@ -113,7 +117,6 @@ let colConst=-1;
  
   allButtons.forEach((button)=>{
       button.addEventListener("click", (e)=>{
-        console.log(backgroundColor);
 
           if(rowConst!=-1)
           for(var i=0;i<currGridColoured.length;i++){
@@ -149,7 +152,7 @@ let colConst=-1;
       })
   })
 
-
+  
 
 
 
