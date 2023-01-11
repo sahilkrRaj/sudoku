@@ -10,15 +10,29 @@ let box=[
   [0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0]
 ];
+let ansbox=[
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0]
+];
 
-let ques = localStorage['objectToPass'];
+let ques = localStorage['question'];
+let ans = localStorage['answer'];
 var a=0;
 for(var i=0;i<9;i++){
   for(var j=0;j<9;j++){
     box[i][j]=parseInt(ques[a]);
+    ansbox[i][j]=parseInt(ans[a]);
     a+=2;
   }
 }
+console.log(box,ansbox);
 
 for(var i=0;i<9;i++){
   for(var j=0;j<9;j++){
@@ -90,17 +104,20 @@ allButtons.forEach((button)=>{
 
 
 let currGridColoured=[];
-  let commonNumbersBox=[];
-  let rowConst=-1;
-  let colConst=-1;
+let commonNumbersBox=[];
+let rowConst=-1;
+let colConst=-1;
+
+// let backgroundColor = getComputedStyle(document.body).getPropertyValue('--cell-colour');
+
  
   allButtons.forEach((button)=>{
       button.addEventListener("click", (e)=>{
-
+        console.log(backgroundColor);
 
           if(rowConst!=-1)
           for(var i=0;i<currGridColoured.length;i++){
-              currGridColoured[i].children[0].style.backgroundColor="#edfff0";
+              currGridColoured[i].children[0].style.backgroundColor = "#edfff0";
               document.getElementById(rowConst+i).style.backgroundColor="#edfff0";
               document.getElementById(i+colConst).style.backgroundColor="#edfff0";
           }
